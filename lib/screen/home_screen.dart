@@ -8,7 +8,7 @@ class Home_screen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(77, 42, 134, 1),
-          title: Text(
+          title: const Text(
             'MFU-Wallet',
             style: TextStyle(
               color: Color.fromRGBO(255, 255, 255, 1),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:mfc_coin/main.dart';
 import 'package:mfc_coin/screen/home_screen.dart';
 import 'package:mfc_coin/screen/signup_screen.dart';
 
@@ -33,16 +34,25 @@ class _Login_screenState extends State<Login_screen> {
       appBar: AppBar(
         backgroundColor: const Color(0xCB2C0073),
         automaticallyImplyLeading: false,
-        flexibleSpace: const Align(
+        flexibleSpace: Align(
           alignment: AlignmentDirectional(0.0, 0.5),
-          child: Text(
-            'MFU-Wallet',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromRGBO(255, 255, 255, 1),
-              fontFamily: 'Poppins',
-              fontSize: 20,
-              fontWeight: FontWeight.normal,
+          child: InkWell(
+            onTap: () async {
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Login_screen(),
+                  ));
+            },
+            child: const Text(
+              'MFU-Wallet',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Color.fromRGBO(255, 255, 255, 1),
+                fontFamily: 'Poppins',
+                fontSize: 20,
+                fontWeight: FontWeight.normal,
+              ),
             ),
           ),
 
@@ -208,10 +218,10 @@ class _Login_screenState extends State<Login_screen> {
                   elevation: 8,
                 ),
                 onPressed: () async {
-                  await Navigator.push(
+                  await Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Login_screen(),
+                      builder: (context) => const MyHomePage(),
                     ),
                   );
                 },
@@ -241,7 +251,7 @@ class _Login_screenState extends State<Login_screen> {
             ),
             InkWell(
               onTap: () async {
-                await Navigator.push(
+                await Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const signup_screen(),

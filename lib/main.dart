@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       // title: 'MFc coin',
       // theme: ThemeData(
       //   primarySwatch: Colors.blue,
@@ -35,10 +35,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return const DefaultTabController(
         length: 4,
         child: Scaffold(
-          backgroundColor: Color.fromRGBO(113, 85, 158, 1),
+          backgroundColor: Color.fromRGBO(77, 42, 134, 1),
           body: TabBarView(children: [
             Home_screen(),
             Trans_screen(),
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Tab(
                 icon: Icon(
-                  Icons.timelapse,
+                  Icons.account_circle,
                 ),
               ),
             ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:mfc_coin/main.dart';
+import 'package:mfc_coin/screen/login_screen.dart';
 
 class signup_screen extends StatefulWidget {
   const signup_screen({Key? key}) : super(key: key);
@@ -33,35 +35,48 @@ class _signup_screenState extends State<signup_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        automaticallyImplyLeading: false,
-        flexibleSpace: const Align(
-          alignment: AlignmentDirectional(0.0, 0.5),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(40),
+        child: AppBar(
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          automaticallyImplyLeading: false,
+          flexibleSpace: Align(
+            alignment: AlignmentDirectional(0.0, 0.5),
 
-          child: Text(
-            'MFU-Wallet',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromARGB(255, 83, 51, 51),
-              fontFamily: 'Poppins',
-              fontSize: 20,
-              fontWeight: FontWeight.normal,
+            child: InkWell(
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const signup_screen(),
+                  ),
+                );
+              },
+              child: const Text(
+                'MFU-Wallet',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 83, 51, 51),
+                  fontFamily: 'Poppins',
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
             ),
-          ),
 
-          // title: Text(
-          //   'MFU-Wallet',
-          //   style: TextStyle(
-          //     color: Color.fromRGBO(255, 255, 255, 1),
-          //     fontFamily: 'Poppins',
-          //     fontSize: 20,
-          //     fontWeight: FontWeight.normal,
-          //   ),
-          // ),
+            // title: Text(
+            //   'MFU-Wallet',
+            //   style: TextStyle(
+            //     color: Color.fromRGBO(255, 255, 255, 1),
+            //     fontFamily: 'Poppins',
+            //     fontSize: 20,
+            //     fontWeight: FontWeight.normal,
+            //   ),
+            // ),
+          ),
+          elevation: 0, //เงา
+          centerTitle: true,
         ),
-        elevation: 0, //เงา
-        centerTitle: true,
       ),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
@@ -71,7 +86,7 @@ class _signup_screenState extends State<signup_screen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 20,
+              height: 13,
             ),
             Align(
               alignment: const AlignmentDirectional(0, 0),
@@ -133,8 +148,8 @@ class _signup_screenState extends State<signup_screen> {
                             ),
                             child: const Icon(
                               Icons.clear,
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              size: 22,
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              size: 16,
                             ),
                           )
                         : null,
@@ -142,7 +157,7 @@ class _signup_screenState extends State<signup_screen> {
                   style: const TextStyle(
                     fontFamily: 'Poppins',
                     color: Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 19,
+                    fontSize: 16,
                   ),
                 ),
               ),
@@ -194,15 +209,15 @@ class _signup_screenState extends State<signup_screen> {
                             child: const Icon(
                               Icons.clear,
                               color: const Color.fromARGB(255, 255, 255, 255),
-                              size: 22,
+                              size: 16,
                             ),
                           )
                         : null,
                   ),
                   style: const TextStyle(
                     fontFamily: 'Poppins',
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 19,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 16,
                   ),
                 ),
               ),
@@ -256,15 +271,15 @@ class _signup_screenState extends State<signup_screen> {
                         passwordVisibility
                             ? Icons.visibility_outlined
                             : Icons.visibility_off_outlined,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        size: 22,
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        size: 16,
                       ),
                     ),
                   ),
                   style: const TextStyle(
                     fontFamily: 'Poppins',
                     color: Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 19,
+                    fontSize: 16,
                   ),
                 ),
               ),
@@ -320,22 +335,49 @@ class _signup_screenState extends State<signup_screen> {
                             ? Icons.visibility_outlined
                             : Icons.visibility_off_outlined,
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        size: 22,
+                        size: 16,
                       ),
                     ),
                   ),
                   style: const TextStyle(
                     fontFamily: 'Poppins',
                     color: Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 19,
+                    fontSize: 16,
                   ),
                 ),
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 22,
             ),
             //ปุ่มสมัคร
+            Container(
+              color: const Color(0xFF280C55),
+              width: 169,
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color.fromRGBO(77, 42, 134, 1),
+                  elevation: 8,
+                ),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const Login_screen(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Sign Up',
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
             //
           ],
         ),
