@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:mfc_coin/main.dart';
 import 'package:mfc_coin/screen/login_screen.dart';
 
 class signup_screen extends StatefulWidget {
@@ -38,14 +37,14 @@ class _signup_screenState extends State<signup_screen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(40),
         child: AppBar(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           automaticallyImplyLeading: false,
           flexibleSpace: Align(
-            alignment: AlignmentDirectional(0.0, 0.5),
+            alignment: const AlignmentDirectional(0.0, 0.5),
 
             child: InkWell(
               onTap: () async {
-                await Navigator.push(
+                await Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const signup_screen(),

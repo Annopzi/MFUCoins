@@ -38,7 +38,7 @@ class _Login_screenState extends State<Login_screen> {
           alignment: AlignmentDirectional(0.0, 0.5),
           child: InkWell(
             onTap: () async {
-              await Navigator.push(
+              await Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const Login_screen(),
