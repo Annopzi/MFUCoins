@@ -35,7 +35,7 @@ class _Login_screenState extends State<Login_screen> {
         backgroundColor: const Color(0xCB2C0073),
         automaticallyImplyLeading: false,
         flexibleSpace: Align(
-          alignment: AlignmentDirectional(0.0, 0.5),
+          alignment: const AlignmentDirectional(0.0, 0.5),
           child: InkWell(
             onTap: () async {
               await Navigator.pushReplacement(
