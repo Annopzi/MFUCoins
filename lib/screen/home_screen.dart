@@ -1,6 +1,10 @@
+import 'dart:ffi';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/rendering.dart';
+import 'package:mfc_coin/main.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({Key? key}) : super(key: key);
@@ -11,7 +15,7 @@ class Home_screen extends StatefulWidget {
 
 class _Home_screenState extends State<Home_screen> {
   // ignore: prefer_typing_uninitialized_variables
-
+  String money = '500';
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -21,7 +25,8 @@ class _Home_screenState extends State<Home_screen> {
 
   @override
   Widget build(BuildContext context) {
-    int a = 6;
+    DateTime date = DateTime.now();
+    double tr1 = 100;
     return Scaffold(
       key: scaffoldKey,
 
@@ -77,6 +82,7 @@ class _Home_screenState extends State<Home_screen> {
                 color: Colors.black,
               ),
               // SingleChildScrollView
+
               Align(
                 child: Container(
                   width: 400,
@@ -90,9 +96,13 @@ class _Home_screenState extends State<Home_screen> {
                         elevation: 5,
                         child: ListTile(
                           title: Text('Transfer money $information'),
-                          subtitle: Text('Payment'),
+                          subtitle: Text('$date'),
                           //
                           // trailing: ,
+                          trailing: Title(
+                            color: Colors.black,
+                            child: Text('$tr1'),
+                          ),
                         ),
                       );
                     },
@@ -114,10 +124,11 @@ class nav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double amount = 600;
     return Center(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(0),
+          padding: EdgeInsets.all(0),
           child: SizedBox(
             width: 1000,
             height: 200,
@@ -140,10 +151,10 @@ class nav extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const Align(
-                    alignment: AlignmentDirectional(0, 0),
+                  Align(
+                    alignment: const AlignmentDirectional(0, 0),
                     child: Text(
-                      '500 MFC',
+                      '$amount MFC',
                       style: TextStyle(
                         fontSize: 26,
                         color: Colors.white,
@@ -158,44 +169,60 @@ class nav extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Align(
-                        child: CircleAvatar(
-                          radius: 35,
-                          backgroundColor: Color.fromRGBO(77, 42, 134, 1),
-                          child: Icon(
-                            Icons.currency_exchange,
-                            size: 50,
-                            color: Color.fromARGB(255, 233, 233, 233),
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: ((context) => MyHomePage()),
+                            ),
+                          );
+                        },
+                        child: const Align(
+                          child: CircleAvatar(
+                            radius: 35,
+                            backgroundColor: Color.fromRGBO(77, 42, 134, 1),
+                            child: Icon(
+                              Icons.currency_exchange,
+                              size: 50,
+                              color: Color.fromARGB(255, 233, 233, 233),
+                            ),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
-                      Align(
-                        child: CircleAvatar(
-                          radius: 35,
-                          backgroundColor: Color.fromRGBO(77, 42, 134, 1),
-                          // color : Color.fromRGBO(77, 42, 134, 1),
-                          child: Icon(
-                            Icons.download,
-                            size: 50,
-                            color: Color.fromARGB(255, 233, 233, 233),
+                      InkWell(
+                        onTap: () async {},
+                        child: const Align(
+                          child: CircleAvatar(
+                            radius: 35,
+                            backgroundColor: Color.fromRGBO(77, 42, 134, 1),
+                            // color : Color.fromRGBO(77, 42, 134, 1),
+                            child: Icon(
+                              Icons.qr_code_2,
+                              size: 50,
+                              color: Color.fromARGB(255, 233, 233, 233),
+                            ),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
-                      Align(
-                        child: CircleAvatar(
-                          radius: 35,
-                          backgroundColor: Color.fromRGBO(77, 42, 134, 1),
-                          child: Icon(
-                            Icons.account_balance,
-                            size: 50,
-                            color: Color.fromARGB(255, 233, 233, 233),
+                      InkWell(
+                        onTap: () async {},
+                        child: const Align(
+                          child: CircleAvatar(
+                            radius: 35,
+                            backgroundColor: Color.fromRGBO(77, 42, 134, 1),
+                            child: Icon(
+                              Icons.settings,
+                              size: 50,
+                              color: Color.fromARGB(255, 233, 233, 233),
+                            ),
                           ),
                         ),
                       ),
