@@ -27,6 +27,70 @@ class History_screen extends StatelessWidget {
         ],
       ),
 //======================================================
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(0),
+                topRight: Radius.circular(0),
+                bottomLeft: Radius.circular(18),
+                bottomRight: Radius.circular(18),
+              ),
+              color: Color.fromRGBO(113, 85, 158, 1),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'History',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          //
+          Column(
+            children: <Widget>[
+              SizedBox(
+                height: 30,
+              ),
+              Align(
+                child: Container(
+                  width: 400,
+                  height: 330,
+                  // color: Colors.red,
+                  child: ListView.builder(
+                    itemCount: 17,
+                    itemBuilder: (context, index) {
+                      var information = index + 1;
+                      return Card(
+                        elevation: 5,
+                        child: ListTile(
+                          title: Text('Transfer money $information'),
+                          subtitle: Text('date'),
+                          //
+                          // trailing: ,
+                          trailing: Title(
+                            color: Colors.black,
+                            child: Text('amount'),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

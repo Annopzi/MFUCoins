@@ -1,10 +1,16 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:mfc_coin/screen/home_screen.dart';
 
 class transfer_screen extends StatelessWidget {
   const transfer_screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var addess = 'MFA9-4SD7-YR5G-B6OA';
+    var amount = 600;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(77, 42, 134, 1),
@@ -29,22 +35,12 @@ class transfer_screen extends StatelessWidget {
       //
 
       body: ListView(
-        //   SizedBox.expand(
-        //     child: Container(
-        //       child: form_top(),
-        //     ),
-        //   ),
-
-        // mainAxisSize: MainAxisSize.max,
-        // mainAxisAlignment: MainAxisAlignment.start,
-        // crossAxisAlignment: CrossAxisAlignment.start,
         padding: const EdgeInsets.all(0.0),
         children: <Widget>[
           // form_top(),
           Container(
             height: 200,
-            // color: Colors.red,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(0),
                 topRight: Radius.circular(0),
@@ -60,7 +56,7 @@ class transfer_screen extends StatelessWidget {
               children: <Widget>[
                 Container(
                   alignment: const AlignmentDirectional(0, 0),
-                  child: Text(
+                  child: const Text(
                     'FROM',
                     style: TextStyle(
                       fontSize: 20,
@@ -68,13 +64,13 @@ class transfer_screen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
                   width: 278,
                   height: 40,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
@@ -84,23 +80,23 @@ class transfer_screen extends StatelessWidget {
                     color: Color.fromRGBO(77, 42, 134, 1),
                   ),
                   child: Text(
-                    'MFA9-4SD7-YR5G-B6OA',
+                    '$addess',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color.fromRGBO(255, 255, 255, 1),
                       fontFamily: 'Roboto',
                       fontSize: 18,
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
                   alignment: const AlignmentDirectional(0, 0),
                   child: Text(
-                    '600.0 MFC',
-                    style: TextStyle(
+                    '$amount MFC',
+                    style: const TextStyle(
                       fontSize: 20,
                       color: Colors.white,
                     ),
@@ -109,17 +105,88 @@ class transfer_screen extends StatelessWidget {
               ],
             ),
           ),
+
+          const SizedBox(
+            height: 3,
+          ),
+
+          const ListTile(
+            title: Text(
+              'To:',
+              style: TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Container(
+            // color: Color.fromARGB(255, 198, 126, 240),
+            padding: const EdgeInsets.all(15),
+            child: wallet_id(),
+          ),
+          const SizedBox(
+            height: 5,
+            // child: ColoredBox(
+            //   color: Color.fromARGB(255, 198, 126, 240),
+            // ),
+          ),
+          Container(
+            // color: Color.fromARGB(255, 198, 126, 240),
+            padding: const EdgeInsets.all(15),
+            child: amount_money(),
+          ),
+          const SizedBox(
+            height: 9,
+          ),
           SizedBox(
-            height: 2,
+            height: 200,
+            // color: Color.fromARGB(255, 198, 126, 240),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 62, 2, 97),
+                  ),
+                  onPressed: () async {
+                    
+                    Navigator.pop(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => Home_screen()),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Transfer',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: const Color.fromRGBO(77, 42, 134, 1),
+                  ),
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-          ListTile(
-            title: Text('To:'),
-          ),
-          wallet_id(),
-          SizedBox(
-            height: 10,
-          ),
-          amount_money(),
         ],
       ),
     );
@@ -127,16 +194,23 @@ class transfer_screen extends StatelessWidget {
 
   Widget wallet_id() {
     return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Wallet ID',
-        labelStyle: TextStyle(
+      decoration: const InputDecoration(
+        prefixIcon: Icon(
+          Icons.account_balance_wallet_rounded,
           color: Colors.white,
+        ),
+        hintText: 'Wallet ID',
+        hintStyle: TextStyle(
+          color: Colors.white,
+        ),
+        labelStyle: TextStyle(
+          color: Color.fromARGB(255, 255, 255, 255),
         ),
         border: OutlineInputBorder(),
         fillColor: Color.fromRGBO(77, 42, 134, 1),
         filled: true,
       ),
-      style: TextStyle(
+      style: const TextStyle(
         fontFamily: 'Poppins',
         color: Color.fromARGB(255, 255, 255, 255),
         fontSize: 20,
@@ -146,8 +220,15 @@ class transfer_screen extends StatelessWidget {
 
   Widget amount_money() {
     return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Amount',
+      decoration: const InputDecoration(
+        prefixIcon: Icon(
+          Icons.attach_money_rounded,
+          color: Colors.white,
+        ),
+        hintText: 'Amount',
+        hintStyle: TextStyle(
+          color: Colors.white,
+        ),
         labelStyle: TextStyle(
           color: Colors.white,
         ),
@@ -156,7 +237,7 @@ class transfer_screen extends StatelessWidget {
         filled: true,
       ),
       keyboardType: TextInputType.number,
-      style: TextStyle(
+      style: const TextStyle(
         fontFamily: 'Poppins',
         color: Color.fromARGB(255, 255, 255, 255),
         fontSize: 20,

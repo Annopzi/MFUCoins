@@ -27,6 +27,36 @@ class Profile_screen extends StatelessWidget {
         ],
       ),
 //======================================================
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(0),
+                topRight: Radius.circular(0),
+                bottomLeft: Radius.circular(18),
+                bottomRight: Radius.circular(18),
+              ),
+              color: Color.fromRGBO(113, 85, 158, 1),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                CircleAvatar(
+                    //
+                    ),
+              ],
+            ),
+          ),
+          //
+          Column(
+            children: <Widget>[],
+          ),
+        ],
+      ),
     );
   }
 }
