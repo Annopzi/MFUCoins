@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mfc_coin/main.dart';
+import 'package:mfc_coin/screen/transfer_screen.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({Key? key}) : super(key: key);
@@ -172,10 +173,10 @@ class nav extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () async {
-                          await Navigator.pushReplacement(
+                          await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: ((context) => MyHomePage()),
+                              builder: ((context) => transfer_screen()),
                             ),
                           );
                         },
@@ -237,27 +238,6 @@ class nav extends StatelessWidget {
           ),
         ),
         // backgroundColor: Colors.red,
-      ),
-    );
-  }
-}
-
-class his extends StatelessWidget {
-  const his({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-        itemCount: 4,
-        itemBuilder: (context, int index) {
-          return Card(
-            elevation: 5,
-            child: ListTile(
-              title: Text('Menu'),
-            ),
-          );
-        },
       ),
     );
   }

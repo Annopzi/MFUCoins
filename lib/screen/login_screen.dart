@@ -251,7 +251,7 @@ class _Login_screenState extends State<Login_screen> {
             ),
             InkWell(
               onTap: () async {
-                await Navigator.pushReplacement(
+                await Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const signup_screen(),
