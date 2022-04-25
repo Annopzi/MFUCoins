@@ -13,24 +13,25 @@ class Login_screen extends StatefulWidget {
 
 class _Login_screenState extends State<Login_screen> {
   //
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  late TextEditingController textController2;
+
+  final formkey = GlobalKey<FormState>();
+  //
+  late TextEditingController passwordController;
   late bool passwordVisibility;
-  late TextEditingController usenameController;
+  late TextEditingController emailController;
   //
   @override
   void initState() {
     super.initState();
-    textController2 = TextEditingController();
+    passwordController = TextEditingController();
     passwordVisibility = false;
-    usenameController = TextEditingController();
+    emailController = TextEditingController();
   }
   //
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: const Color(0xCB2C0073),
         automaticallyImplyLeading: false,
@@ -73,6 +74,7 @@ class _Login_screenState extends State<Login_screen> {
       backgroundColor: const Color(0xFF2C0073),
 
       body: SingleChildScrollView(
+        key: formkey,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -102,50 +104,54 @@ class _Login_screenState extends State<Login_screen> {
             SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                child: TextFormField(
-                  onChanged: (_) => EasyDebounce.debounce(
-                    'usenameController',
-                    const Duration(milliseconds: 200),
-                    () => setState(() {}),
-                  ),
-                  controller: usenameController,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    hintText: 'E-mail',
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 1,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      onChanged: (_) => EasyDebounce.debounce(
+                        'emailController',
+                        const Duration(milliseconds: 200),
+                        () => setState(() {}),
                       ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 1,
+                      controller: emailController,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        hintText: 'E-mail',
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        suffixIcon: emailController.text.isNotEmpty
+                            ? InkWell(
+                                onTap: () => setState(
+                                  () => emailController.clear(),
+                                ),
+                                child: const Icon(
+                                  Icons.clear,
+                                  color: Color(0xFF757575),
+                                  size: 22,
+                                ),
+                              )
+                            : null,
                       ),
-                      borderRadius: BorderRadius.circular(20),
+                      style: const TextStyle(
+                        fontFamily: 'Poppins',
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
                     ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    suffixIcon: usenameController.text.isNotEmpty
-                        ? InkWell(
-                            onTap: () => setState(
-                              () => usenameController.clear(),
-                            ),
-                            child: const Icon(
-                              Icons.clear,
-                              color: Color(0xFF757575),
-                              size: 22,
-                            ),
-                          )
-                        : null,
-                  ),
-                  style: const TextStyle(
-                    fontFamily: 'Poppins',
-                    color: Colors.black,
-                    fontSize: 20,
-                  ),
+                  ],
                 ),
               ),
             ),
@@ -157,13 +163,13 @@ class _Login_screenState extends State<Login_screen> {
                 padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                 child: TextFormField(
                   onChanged: (_) => EasyDebounce.debounce(
-                    'textController2',
+                    'passwordController',
                     const Duration(milliseconds: 2000),
                     () => setState(
                       () {},
                     ),
                   ),
-                  controller: textController2,
+                  controller: passwordController,
                   obscureText: !passwordVisibility,
                   decoration: InputDecoration(
                     hintText: 'Password',
@@ -217,13 +223,35 @@ class _Login_screenState extends State<Login_screen> {
                   primary: const Color(0xFF280C55),
                   elevation: 8,
                 ),
-                onPressed: () async {
-                  await Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MyHomePage(),
-                    ),
-                  );
+                onPressed: () {
+                  if (emailController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MyHomePage(),
+                      ),
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text(
+                          'E-mail & Password is Empty',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        content: const Text('Please input E-mail & Password'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 },
                 child: const Text(
                   'Login',

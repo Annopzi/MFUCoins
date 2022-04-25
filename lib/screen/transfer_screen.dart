@@ -1,10 +1,23 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:mfc_coin/screen/home_screen.dart';
 
-class transfer_screen extends StatelessWidget {
+class transfer_screen extends StatefulWidget {
   const transfer_screen({Key? key}) : super(key: key);
+
+  @override
+  State<transfer_screen> createState() => _transfer_screenState();
+}
+
+class _transfer_screenState extends State<transfer_screen> {
+  //
+  late TextEditingController walletidController;
+  late TextEditingController amountController;
+
+  void initState() {
+    super.initState();
+    walletidController = TextEditingController();
+    amountController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,14 +162,35 @@ class transfer_screen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(255, 62, 2, 97),
                   ),
-                  onPressed: () async {
-                    
-                    Navigator.pop(
-                      context,
-                      MaterialPageRoute(
-                        builder: ((context) => Home_screen()),
-                      ),
-                    );
+                  onPressed: () {
+                    if (walletidController.text.isNotEmpty &&
+                        amountController.text.isNotEmpty) {
+                      Navigator.pop(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => Home_screen()),
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text(
+                            'Wallet ID & Amount is Empty',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          content: const Text('Please input Wallet & Amount'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
                   },
                   child: const Text(
                     'Transfer',
@@ -194,6 +228,7 @@ class transfer_screen extends StatelessWidget {
 
   Widget wallet_id() {
     return TextFormField(
+      controller: walletidController,
       decoration: const InputDecoration(
         prefixIcon: Icon(
           Icons.account_balance_wallet_rounded,
@@ -220,6 +255,7 @@ class transfer_screen extends StatelessWidget {
 
   Widget amount_money() {
     return TextFormField(
+      controller: amountController,
       decoration: const InputDecoration(
         prefixIcon: Icon(
           Icons.attach_money_rounded,
