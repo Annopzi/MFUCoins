@@ -226,6 +226,7 @@ class _Login_screenState extends State<Login_screen> {
                 onPressed: () {
                   if (emailController.text.isNotEmpty &&
                       passwordController.text.isNotEmpty) {
+                        
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -233,6 +234,7 @@ class _Login_screenState extends State<Login_screen> {
                       ),
                     );
                   } else {
+
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
