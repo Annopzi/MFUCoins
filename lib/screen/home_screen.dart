@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mfc_coin/main.dart';
+import 'package:mfc_coin/screen/test_api.dart';
 import 'package:mfc_coin/screen/transfer_screen.dart';
 
 class Home_screen extends StatefulWidget {
@@ -211,7 +212,14 @@ class nav extends StatelessWidget {
                         width: 20,
                       ),
                       InkWell(
-                        onTap: () async {},
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Test_screen(),
+                            ),
+                          );
+                        },
                         child: const Align(
                           child: CircleAvatar(
                             radius: 35,

@@ -226,7 +226,6 @@ class _Login_screenState extends State<Login_screen> {
                 onPressed: () {
                   if (emailController.text.isNotEmpty &&
                       passwordController.text.isNotEmpty) {
-                        
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -234,7 +233,6 @@ class _Login_screenState extends State<Login_screen> {
                       ),
                     );
                   } else {
-
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
@@ -247,7 +245,7 @@ class _Login_screenState extends State<Login_screen> {
                         content: const Text('Please input E-mail & Password'),
                         actions: [
                           TextButton(
-                            onPressed: () => Navigator.pop(context, 'OK'),
+                            onPressed: () => Navigator.pop(context),
                             child: const Text('OK'),
                           ),
                         ],

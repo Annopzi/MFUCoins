@@ -3,6 +3,7 @@ import 'package:mfc_coin/screen/history.dart';
 import 'package:mfc_coin/screen/home_screen.dart';
 import 'package:mfc_coin/screen/login_screen.dart';
 import 'package:mfc_coin/screen/profile.dart';
+import 'package:mfc_coin/screen/test_api.dart';
 import 'package:mfc_coin/screen/transfer_qrscan.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       // theme: ThemeData(
       //   primarySwatch: Colors.blue,
       // ),
-      home: Login_screen(),
+      home: Test_screen(), //Login_screen()
     );
   }
 }
