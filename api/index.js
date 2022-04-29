@@ -6,7 +6,7 @@ const mysql = require('mysql');
 app.use(bodyParser.json());
 
 const conn = mysql.createConnection({
-    host: '10.1.29.215', //10.1.29.215  se.mfu.ac.th
+    host: 'se.mfu.ac.th', //10.1.29.215  se.mfu.ac.th
     user: 'md22annop',
     password: '6331305031',
     database: 'md22_annop_db'

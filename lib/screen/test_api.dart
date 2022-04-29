@@ -40,7 +40,7 @@ class _Test_screenState extends State<Test_screen> {
           children: <Widget>[
             Align(
               child: Text(
-                'test',
+                'Gat APi',
                 style: TextStyle(
                   fontSize: 40,
                 ),
@@ -56,7 +56,7 @@ class _Test_screenState extends State<Test_screen> {
                 margin: const EdgeInsets.all(20.0),
                 width: 1000,
                 height: 450,
-                // color: Colors.red,
+                color: Color.fromARGB(96, 209, 117, 111),
                 //
 
                 child: FutureBuilder<dynamic>(
@@ -67,7 +67,7 @@ class _Test_screenState extends State<Test_screen> {
                         //สร้าง Widget ListView
 
                         children: [
-                          _buildRow(snapshot.data["results"].toString()),
+                          _buildRow(snapshot.data.toString().toString()),
                         ],
                       );
                     } else if (snapshot.hasError) {
@@ -89,12 +89,11 @@ class _Test_screenState extends State<Test_screen> {
 
 Future<dynamic> fetchAlbum() async {
   final response = await http
-      .get(Uri.parse('http://selab.mfu.ac.th:7631/api/get/email/mfuwallet/'));
+      .get(Uri.parse('http://selab.mfu.ac.th:7631/api/getAllmfuwallet/'));
 
   if (response.statusCode == 200) {
     var jsonResponse = jsonDecode(response.body);
-
-    // var itemCount = jsonResponse;
+    // print(jsonResponse);
     return jsonResponse;
   } else {
     throw Exception('Failed to load');
