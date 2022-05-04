@@ -37,6 +37,9 @@ dependencies:
   icon: ^2.2.1
   http: ^0.13.4
   provider: ^6.0.2
+  
+  
+  
 
 dev_dependencies:
   flutter_test:

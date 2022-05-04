@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mfc_coin/screen/Student.dart';
 import 'package:mfc_coin/screen/history.dart';
 import 'package:mfc_coin/screen/home_screen.dart';
 import 'package:mfc_coin/screen/login_screen.dart';
 import 'package:mfc_coin/screen/profile.dart';
-import 'package:mfc_coin/screen/test_api.dart';
 import 'package:mfc_coin/screen/transfer_qrscan.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       // theme: ThemeData(
       //   primarySwatch: Colors.blue,
       // ),
-      home: Test_screen(), //Login_screen()
+      home: Login_screen(), //Login_screen()
     );
   }
 }
@@ -36,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const DefaultTabController(
+    return DefaultTabController(
         length: 4,
         child: Scaffold(
           backgroundColor: Color.fromRGBO(77, 42, 134, 1),

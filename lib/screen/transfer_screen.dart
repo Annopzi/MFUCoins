@@ -81,6 +81,7 @@ class _transfer_screenState extends State<transfer_screen> {
                   height: 20,
                 ),
                 Container(
+                  padding: EdgeInsets.all(10.0),
                   width: 278,
                   height: 40,
                   decoration: const BoxDecoration(

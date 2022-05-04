@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mfc_coin/screen/login_screen.dart';
 
 class Profile_screen extends StatelessWidget {
   const Profile_screen({Key? key}) : super(key: key);
@@ -47,8 +48,8 @@ class Profile_screen extends StatelessWidget {
               children: <Widget>[
                 Container(
                   //
-                  width: 50,
-                  height: 50,
+                  width: 150,
+                  height: 150,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -62,7 +63,26 @@ class Profile_screen extends StatelessWidget {
           ),
           //
           Column(
-            children: <Widget>[],
+            children: <Widget>[
+              SizedBox(
+                height: 130,
+              ),
+              Align(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Color.fromARGB(248, 255, 255, 255),
+                    backgroundColor: Color.fromARGB(255, 196, 40, 243),
+                  ),
+                  onPressed: () async {
+                    await Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => Login_screen())));
+                  },
+                  child: Text("Log out"),
+                ),
+              ),
+            ],
           ),
         ],
       ),

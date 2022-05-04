@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mfc_coin/main.dart';
-import 'package:mfc_coin/screen/test_api.dart';
+import 'package:mfc_coin/screen/Student.dart';
 import 'package:mfc_coin/screen/transfer_screen.dart';
 
 class Home_screen extends StatefulWidget {
@@ -216,7 +216,7 @@ class nav extends StatelessWidget {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Test_screen(),
+                              builder: (context) => StudentName_screen(),
                             ),
                           );
                         },
