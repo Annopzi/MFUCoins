@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:mfc_coin/main.dart';
+import 'package:mfc_coin/screen/futuredata.dart';
 import 'package:mfc_coin/screen/home_screen.dart';
 import 'package:mfc_coin/screen/signup_screen.dart';
 
@@ -26,6 +27,7 @@ class _Login_screenState extends State<Login_screen> {
     passwordController = TextEditingController();
     passwordVisibility = false;
     emailController = TextEditingController();
+    getStudentData();
   }
   //
 
@@ -148,7 +150,7 @@ class _Login_screenState extends State<Login_screen> {
                       style: const TextStyle(
                         fontFamily: 'Poppins',
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 15,
                       ),
                     ),
                   ],
@@ -205,7 +207,7 @@ class _Login_screenState extends State<Login_screen> {
                   style: const TextStyle(
                     fontFamily: 'Poppins',
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 15,
                   ),
                 ),
               ),
@@ -218,48 +220,84 @@ class _Login_screenState extends State<Login_screen> {
               color: const Color(0xFF280C55),
               width: 169,
               height: 50,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFF280C55),
-                  elevation: 8,
-                ),
-                onPressed: () {
-                  if (emailController.text.isNotEmpty &&
-                      passwordController.text.isNotEmpty) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const MyHomePage(),
-                      ),
-                    );
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: const Text(
-                          'E-mail & Password is Empty',
-                          style: TextStyle(
-                            fontSize: 16,
+              child: FutureBuilder<dynamic>(
+                future: getStudentData(),
+                builder: (context, snapshot) {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(0xFF280C55),
+                      elevation: 8,
+                    ),
+                    onPressed: () {
+                      if (emailController.text.isNotEmpty &&
+                          passwordController.text.isNotEmpty) {
+                        if (emailController.text == "${snapshot.data[0]["email"].toString()}" && passwordController.text == "${snapshot.data[0]["password"].toString()}" ||
+                            emailController.text ==
+                                    "${snapshot.data[1]["email"].toString()}" &&
+                                passwordController.text ==
+                                    "${snapshot.data[1]["password"].toString()}" ||
+                            emailController.text ==
+                                    "${snapshot.data[2]["email"].toString()}" &&
+                                passwordController.text ==
+                                    "${snapshot.data[2]["password"].toString()}") {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyHomePage(),
+                            ),
+                          );
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text(
+                                'E-mail & Password is Wrong',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                              content:
+                                  const Text('E-mail and Password is Wrong'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text(
+                              'E-mail or Password is Empty',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            content:
+                                const Text('Please input E-mail & Password'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('OK'),
+                              ),
+                            ],
                           ),
-                        ),
-                        content: const Text('Please input E-mail & Password'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('OK'),
-                          ),
-                        ],
+                        );
+                      }
+                    },
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        color: Colors.white,
                       ),
-                    );
-                  }
+                    ),
+                  );
                 },
-                child: const Text(
-                  'Login',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    color: Colors.white,
-                  ),
-                ),
               ),
             ),
 
@@ -282,7 +320,7 @@ class _Login_screenState extends State<Login_screen> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const signup_screen(),
+                    builder: (context) => signup_screen(),
                   ),
                 );
               },

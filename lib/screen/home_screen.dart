@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mfc_coin/main.dart';
+import 'package:mfc_coin/provider/history.dart';
+import 'package:mfc_coin/provider/history_provider.dart';
 import 'package:mfc_coin/screen/Student.dart';
 import 'package:mfc_coin/screen/transfer_screen.dart';
+import 'package:mfc_coin/screen/wldget.dart';
+import 'package:provider/provider.dart';
+
+import 'futuredata.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({Key? key}) : super(key: key);
@@ -13,19 +19,21 @@ class Home_screen extends StatefulWidget {
 }
 
 class _Home_screenState extends State<Home_screen> {
-  // ignore: prefer_typing_uninitialized_variables
   String money = '500';
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  late Future<dynamic> studentdatas;
 
   @override
   void initState() {
     super.initState();
+    studentdatas = getStudentData();
   }
 
   @override
   Widget build(BuildContext context) {
     DateTime date = DateTime.now();
-    double tr1 = 100;
+    double amounttr = 100;
+
     return Scaffold(
       key: scaffoldKey,
 
@@ -49,7 +57,7 @@ class _Home_screenState extends State<Home_screen> {
           ),
         ],
       ),
-//===================================================
+      //===================================================
 
       body: Stack(
         children: <Widget>[
@@ -85,27 +93,9 @@ class _Home_screenState extends State<Home_screen> {
               Align(
                 child: Container(
                   width: 400,
-                  height: 275,
+                  height: 270,
                   // color: Colors.red,
-                  child: ListView.builder(
-                    itemCount: 17,
-                    itemBuilder: (context, index) {
-                      var information = index + 1;
-                      return Card(
-                        elevation: 5,
-                        child: ListTile(
-                          title: Text('Transfer money $information'),
-                          subtitle: Text('$date'),
-                          //
-                          // trailing: ,
-                          trailing: Title(
-                            color: Colors.black,
-                            child: Text('$tr1'),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                  child: consumer(),
                 ),
               ),
             ],
@@ -151,15 +141,30 @@ class nav extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Align(
-                    alignment: const AlignmentDirectional(0, 0),
-                    child: Text(
-                      '$amount MFC',
-                      style: TextStyle(
-                        fontSize: 26,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                      alignment: const AlignmentDirectional(0, 0),
+                      child: FutureBuilder<dynamic>(
+                        future: getStudentData(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Column(
+                              children: [
+                                amount_by_acc(
+                                    "${snapshot.data[0]['amount'].toString()} MFC"),
+                                //${data[0]['id']}
+                              ],
+                            );
+                          } else if (snapshot.hasError) {
+                            return Column(
+                              children: [
+                                amount_by_acc(
+                                  "ID: [ No Have Data ]",
+                                ),
+                              ],
+                            );
+                          }
+                          return CircularProgressIndicator();
+                        },
+                      )),
                   const SizedBox(
                     height: 20,
                     width: 2,

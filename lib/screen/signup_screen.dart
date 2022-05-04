@@ -360,12 +360,36 @@ class _signup_screenState extends State<signup_screen> {
                   elevation: 8,
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const Login_screen(),
-                    ),
-                  );
+                  if (userController.text.isNotEmpty &&
+                      emailController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty &&
+                      confirmpasswordController.text.isNotEmpty) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const Login_screen(),
+                      ),
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text(
+                          'Please input information',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        content: const Text('Please input information'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 },
                 child: const Text(
                   'Sign Up',

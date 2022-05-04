@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mfc_coin/screen/wldget.dart';
 
 class History_screen extends StatelessWidget {
   const History_screen({Key? key}) : super(key: key);
@@ -66,25 +67,7 @@ class History_screen extends StatelessWidget {
                   width: 400,
                   height: 330,
                   // color: Colors.red,
-                  child: ListView.builder(
-                    itemCount: 17,
-                    itemBuilder: (context, index) {
-                      var information = index + 1;
-                      return Card(
-                        elevation: 5,
-                        child: ListTile(
-                          title: Text('Transfer money $information'),
-                          subtitle: Text('date'),
-                          //
-                          // trailing: ,
-                          trailing: Title(
-                            color: Colors.black,
-                            child: Text('amount'),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                  child: consumer(),
                 ),
               ),
             ],

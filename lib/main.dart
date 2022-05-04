@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mfc_coin/provider/history_provider.dart';
 import 'package:mfc_coin/screen/Student.dart';
 import 'package:mfc_coin/screen/history.dart';
 import 'package:mfc_coin/screen/home_screen.dart';
 import 'package:mfc_coin/screen/login_screen.dart';
 import 'package:mfc_coin/screen/profile.dart';
 import 'package:mfc_coin/screen/transfer_qrscan.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,12 +16,19 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      // title: 'MFc coin',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      // ),
-      home: Login_screen(), //Login_screen()
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) {
+          return HistoryProvider();
+        })
+      ],
+      child: MaterialApp(
+        title: 'MFc coin',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Login_screen(), //Login_screen()
+      ),
     );
   }
 }

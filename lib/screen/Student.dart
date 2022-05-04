@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'futuredata.dart';
+
 class StudentName_screen extends StatefulWidget {
   const StudentName_screen({Key? key}) : super(key: key);
 
@@ -15,28 +17,15 @@ class _StudentName_screenState extends State<StudentName_screen> {
   @override
   void initState() {
     super.initState();
-    studentdata = StudentData();
+    studentdata = getStudentData();
     // StudentData();
-  }
-
-  Future<dynamic> StudentData() async {
-    print(456);
-    final response = await http
-        .get(Uri.parse('http://selab.mfu.ac.th:7631/api/getAllmfuwallet/'));
-    if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body);
-      print(jsonResponse);
-      return jsonResponse;
-    } else {
-      throw Exception('No Internet.');
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter UI Code'),
+        title: Text('Information This account'),
         elevation: 4,
         centerTitle: true,
       ),
@@ -66,7 +55,7 @@ class _StudentName_screenState extends State<StudentName_screen> {
                   if (snapshot.hasData) {
                     return Column(
                       children: [
-                        _buildRow("ID:  ${snapshot.data[1]['id'].toString()} "),
+                        _buildRow("ID:  ${snapshot.data[0]['id'].toString()} "),
                         //${data[0]['id']}
                       ],
                     );
@@ -94,7 +83,7 @@ class _StudentName_screenState extends State<StudentName_screen> {
                     return Column(
                       children: [
                         _buildRow(
-                            "Username:   ${snapshot.data[1]['username'].toString()}  "),
+                            "Username:   ${snapshot.data[0]['username'].toString()}  "),
                       ],
                     );
                   } else if (snapshot.hasError) {
@@ -120,8 +109,8 @@ class _StudentName_screenState extends State<StudentName_screen> {
                   if (snapshot.hasData) {
                     return Column(
                       children: [
-                        _buildRow(
-                            "E-mail:   ${snapshot.data[1]['email'].toString()}  "),
+                        _buildRow2(
+                            "E-mail:   ${snapshot.data[0]['email'].toString()}  "),
                       ],
                     );
                   } else if (snapshot.hasError) {
@@ -147,13 +136,29 @@ class _StudentName_screenState extends State<StudentName_screen> {
 Widget _buildRow(String dataRow) {
   return ListTile(
     tileColor: Color.fromARGB(255, 139, 240, 192),
-    contentPadding: EdgeInsets.all(34.0),
+    contentPadding: EdgeInsets.all(30.0),
     style: ListTileStyle.drawer,
     title: Text(
       dataRow,
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  );
+}
+
+Widget _buildRow2(String dataRow) {
+  return ListTile(
+    tileColor: Color.fromARGB(255, 139, 240, 192),
+    contentPadding: EdgeInsets.all(30.0),
+    style: ListTileStyle.drawer,
+    title: Text(
+      dataRow,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
     ),

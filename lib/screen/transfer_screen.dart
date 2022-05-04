@@ -83,7 +83,7 @@ class _transfer_screenState extends State<transfer_screen> {
                 Container(
                   padding: EdgeInsets.all(10.0),
                   width: 278,
-                  height: 40,
+                  height: 45,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
@@ -99,7 +99,7 @@ class _transfer_screenState extends State<transfer_screen> {
                     style: const TextStyle(
                       color: Color.fromRGBO(255, 255, 255, 1),
                       fontFamily: 'Roboto',
-                      fontSize: 18,
+                      fontSize: 16,
                     ),
                   ),
                 ),
