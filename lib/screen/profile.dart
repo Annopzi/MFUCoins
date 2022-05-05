@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mfc_coin/screen/login_screen.dart';
+import 'package:mfc_coin/screen/wldget.dart';
 
 class Profile_screen extends StatelessWidget {
   const Profile_screen({Key? key}) : super(key: key);
@@ -20,11 +21,7 @@ class Profile_screen extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          CircleAvatar(
-            child: Image.asset(
-              'assets/images/logo_profile_test.png',
-            ),
-          ),
+          CircleAvatars("A"),
         ],
       ),
 //======================================================

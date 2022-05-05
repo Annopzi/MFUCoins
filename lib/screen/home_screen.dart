@@ -5,6 +5,7 @@ import 'package:mfc_coin/main.dart';
 import 'package:mfc_coin/provider/history.dart';
 import 'package:mfc_coin/provider/history_provider.dart';
 import 'package:mfc_coin/screen/Student.dart';
+import 'package:mfc_coin/screen/transfer_qrscan.dart';
 import 'package:mfc_coin/screen/transfer_screen.dart';
 import 'package:mfc_coin/screen/wldget.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,6 @@ class Home_screen extends StatefulWidget {
 }
 
 class _Home_screenState extends State<Home_screen> {
-  String money = '500';
   final scaffoldKey = GlobalKey<ScaffoldState>();
   late Future<dynamic> studentdatas;
 
@@ -31,9 +31,6 @@ class _Home_screenState extends State<Home_screen> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime date = DateTime.now();
-    double amounttr = 100;
-
     return Scaffold(
       key: scaffoldKey,
 
@@ -50,11 +47,7 @@ class _Home_screenState extends State<Home_screen> {
         ),
         centerTitle: true,
         actions: [
-          CircleAvatar(
-            child: Image.asset(
-              'assets/images/logo_profile_test.png',
-            ),
-          ),
+          CircleAvatars("A"),
         ],
       ),
       //===================================================
@@ -93,7 +86,7 @@ class _Home_screenState extends State<Home_screen> {
               Align(
                 child: Container(
                   width: 400,
-                  height: 270,
+                  height: 300,
                   // color: Colors.red,
                   child: consumer(),
                 ),
@@ -199,7 +192,12 @@ class nav extends StatelessWidget {
                         width: 20,
                       ),
                       InkWell(
-                        onTap: () async {},
+                        onTap: () async {
+                          await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Trans_screen()));
+                        },
                         child: const Align(
                           child: CircleAvatar(
                             radius: 35,
@@ -230,7 +228,7 @@ class nav extends StatelessWidget {
                             radius: 35,
                             backgroundColor: Color.fromRGBO(77, 42, 134, 1),
                             child: Icon(
-                              Icons.settings,
+                              Icons.account_circle_rounded,
                               size: 50,
                               color: Color.fromARGB(255, 233, 233, 233),
                             ),

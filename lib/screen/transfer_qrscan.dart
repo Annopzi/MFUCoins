@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mfc_coin/screen/wldget.dart';
 
 class Trans_screen extends StatelessWidget {
   const Trans_screen({Key? key}) : super(key: key);
@@ -19,11 +20,7 @@ class Trans_screen extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          CircleAvatar(
-            child: Image.asset(
-              'assets/images/logo_profile_test.png',
-            ),
-          ),
+          CircleAvatars("A"),
         ],
       ),
 //======================================================

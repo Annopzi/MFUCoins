@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mfc_coin/screen/login_screen.dart';
 import 'dart:convert';
 
 import 'futuredata.dart';
@@ -25,9 +26,10 @@ class _StudentName_screenState extends State<StudentName_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Information This account'),
+        title: Text('Profile'),
         elevation: 4,
         centerTitle: true,
+        backgroundColor: Color.fromRGBO(77, 42, 134, 1),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(12.0),
@@ -38,7 +40,7 @@ class _StudentName_screenState extends State<StudentName_screen> {
             ),
             Align(
               child: Text(
-                'StudentName',
+                'Information',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -126,6 +128,27 @@ class _StudentName_screenState extends State<StudentName_screen> {
                 },
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Align(
+              child: Container(
+                width: 300,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Color.fromARGB(248, 255, 255, 255),
+                    backgroundColor: Color.fromARGB(255, 119, 13, 151),
+                  ),
+                  onPressed: () async {
+                    await Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => Login_screen())));
+                  },
+                  child: Text("Log out"),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -135,7 +158,7 @@ class _StudentName_screenState extends State<StudentName_screen> {
 
 Widget _buildRow(String dataRow) {
   return ListTile(
-    tileColor: Color.fromARGB(255, 139, 240, 192),
+    tileColor: Color.fromARGB(255, 104, 68, 163),
     contentPadding: EdgeInsets.all(30.0),
     style: ListTileStyle.drawer,
     title: Text(
@@ -144,6 +167,7 @@ Widget _buildRow(String dataRow) {
       style: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
+        color: Colors.white,
       ),
     ),
   );
@@ -151,7 +175,7 @@ Widget _buildRow(String dataRow) {
 
 Widget _buildRow2(String dataRow) {
   return ListTile(
-    tileColor: Color.fromARGB(255, 139, 240, 192),
+    tileColor: Color.fromARGB(255, 104, 68, 163),
     contentPadding: EdgeInsets.all(30.0),
     style: ListTileStyle.drawer,
     title: Text(
@@ -160,6 +184,7 @@ Widget _buildRow2(String dataRow) {
       style: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
+        color: Colors.white,
       ),
     ),
   );

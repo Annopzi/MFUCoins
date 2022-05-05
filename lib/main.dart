@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Home_screen(),
             Trans_screen(),
             History_screen(),
-            Profile_screen(),
+            StudentName_screen(),
           ]),
           bottomNavigationBar: TabBar(
             tabs: [

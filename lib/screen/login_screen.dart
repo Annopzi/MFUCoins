@@ -20,6 +20,7 @@ class _Login_screenState extends State<Login_screen> {
   late TextEditingController passwordController;
   late bool passwordVisibility;
   late TextEditingController emailController;
+  List data = [];
   //
   @override
   void initState() {
@@ -223,6 +224,10 @@ class _Login_screenState extends State<Login_screen> {
               child: FutureBuilder<dynamic>(
                 future: getStudentData(),
                 builder: (context, snapshot) {
+                  // List B = [];
+                  // B = snapshot.data;
+
+                  // print("B: $B");
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: const Color(0xFF280C55),
@@ -231,6 +236,13 @@ class _Login_screenState extends State<Login_screen> {
                     onPressed: () {
                       if (emailController.text.isNotEmpty &&
                           passwordController.text.isNotEmpty) {
+                        for (var i = 0;
+                            i <= snapshot.data.toString().length;
+                            i++) {
+                          // print("I: $i");
+                          // if (emailController.text == "${sna}") {
+                          // }
+                        }
                         if (emailController.text == "${snapshot.data[0]["email"].toString()}" && passwordController.text == "${snapshot.data[0]["password"].toString()}" ||
                             emailController.text ==
                                     "${snapshot.data[1]["email"].toString()}" &&
@@ -239,7 +251,9 @@ class _Login_screenState extends State<Login_screen> {
                             emailController.text ==
                                     "${snapshot.data[2]["email"].toString()}" &&
                                 passwordController.text ==
-                                    "${snapshot.data[2]["password"].toString()}") {
+                                    "${snapshot.data[2]["password"].toString()}" ||
+                            emailController.text == "admin" &&
+                                passwordController.text == "admin") {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -281,7 +295,12 @@ class _Login_screenState extends State<Login_screen> {
                                 const Text('Please input E-mail & Password'),
                             actions: [
                               TextButton(
-                                onPressed: () => Navigator.pop(context),
+                                onPressed: () => Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MyHomePage(),
+                                  ),
+                                ),
                                 child: const Text('OK'),
                               ),
                             ],

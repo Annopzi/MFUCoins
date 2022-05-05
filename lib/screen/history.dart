@@ -20,11 +20,7 @@ class History_screen extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          CircleAvatar(
-            child: Image.asset(
-              'assets/images/logo_profile_test.png',
-            ),
-          ),
+          CircleAvatars("A"),
         ],
       ),
 //======================================================
@@ -49,7 +45,7 @@ class History_screen extends StatelessWidget {
                 Text(
                   'History',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 40,
                     color: Colors.white,
                   ),
                 ),

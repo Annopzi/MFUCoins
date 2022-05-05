@@ -44,6 +44,13 @@ Widget amount_by_acc(String str) {
   );
 }
 
+Widget CircleAvatars(String str) {
+  return CircleAvatar(
+    radius: 20,
+    child: Text(str),
+  );
+}
+
 Widget consumer() {
   return Consumer(
     builder: ((context, HistoryProvider provider, child) {

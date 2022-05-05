@@ -3,17 +3,16 @@ import 'dart:convert';
 
 //getAll
 Future<dynamic> getStudentData() async {
-  print(456);
+  List datas = [];
+  print('Data Ready');
   final response = await http
       .get(Uri.parse('http://selab.mfu.ac.th:7631/api/getAllmfuwallet/'));
   if (response.statusCode == 200) {
     var jsonResponse = jsonDecode(response.body);
-    print(jsonResponse);
+    datas = jsonResponse;
+    print("Data: ${datas}\n Data.length: ${datas.length}");
     return jsonResponse;
   } else {
     throw Exception('No Internet.');
   }
 }
-
-
-
