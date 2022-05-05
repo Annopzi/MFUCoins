@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mfc_coin/screen/futuredata.dart';
 import 'package:mfc_coin/screen/home_screen.dart';
+import 'package:mfc_coin/screen/wldget.dart';
 
 class transfer_screen extends StatefulWidget {
   const transfer_screen({Key? key}) : super(key: key);
@@ -9,6 +11,8 @@ class transfer_screen extends StatefulWidget {
 }
 
 class _transfer_screenState extends State<transfer_screen> {
+
+
   //
   late TextEditingController walletidController;
   late TextEditingController amountController;
@@ -17,6 +21,7 @@ class _transfer_screenState extends State<transfer_screen> {
     super.initState();
     walletidController = TextEditingController();
     amountController = TextEditingController();
+    getStudentData();
   }
 
   @override
@@ -62,61 +67,71 @@ class _transfer_screenState extends State<transfer_screen> {
               ),
               color: Color.fromRGBO(113, 85, 158, 1),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  alignment: const AlignmentDirectional(0, 0),
-                  child: const Text(
-                    'FROM',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  padding: EdgeInsets.all(10.0),
-                  width: 278,
-                  height: 45,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    color: Color.fromRGBO(77, 42, 134, 1),
-                  ),
-                  child: Text(
-                    '$addess',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      fontFamily: 'Roboto',
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  alignment: const AlignmentDirectional(0, 0),
-                  child: Text(
-                    '$amount MFC',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+            child: FutureBuilder<dynamic>(
+              future: getStudentData(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        alignment: const AlignmentDirectional(0, 0),
+                        child: const Text(
+                          'FROM',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(10.0),
+                        width: 278,
+                        height: 45,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                          ),
+                          color: Color.fromRGBO(77, 42, 134, 1),
+                        ),
+                        child: Text(
+                          "My ID: ${snapshot.data[0]["id"]}",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                            fontFamily: 'Roboto',
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        alignment: const AlignmentDirectional(0, 0),
+                        child: Text(
+                          "${snapshot.data[0]["amount"]} MFC",
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Loading("Loading...");
+                }
+              },
+              // child:
             ),
           ),
 
@@ -166,30 +181,29 @@ class _transfer_screenState extends State<transfer_screen> {
                   onPressed: () {
                     if (walletidController.text.isNotEmpty &&
                         amountController.text.isNotEmpty) {
-                      Navigator.pop(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => Home_screen()),
-                        ),
-                      );
+                      if (double.parse(amountController.text) <= 0 ||
+                          double.parse(walletidController.text) <= 0) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => dialog(
+                              context,
+                              "Wallet ID & Amount is must more than 0",
+                              "Please input Wallet & Amount"),
+                        );
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              Trans_finish(context, "Success", "Finish"),
+                        );
+                      }
                     } else {
                       showDialog(
                         context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text(
-                            'Wallet ID & Amount is Empty',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
-                          content: const Text('Please input Wallet & Amount'),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
+                        builder: (BuildContext context) => dialog(
+                            context,
+                            "Wallet ID & Amount is Empty",
+                            "Please input Wallet & Amount"),
                       );
                     }
                   },
@@ -246,6 +260,7 @@ class _transfer_screenState extends State<transfer_screen> {
         fillColor: Color.fromRGBO(77, 42, 134, 1),
         filled: true,
       ),
+      keyboardType: TextInputType.number,
       style: const TextStyle(
         fontFamily: 'Poppins',
         color: Color.fromARGB(255, 255, 255, 255),

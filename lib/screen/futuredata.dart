@@ -11,7 +11,7 @@ Future<dynamic> getStudentData() async {
     var jsonResponse = jsonDecode(response.body);
     datas = jsonResponse;
     print("Data: ${datas}\n Data.length: ${datas.length}");
-    return jsonResponse;
+    return datas;
   } else {
     throw Exception('No Internet.');
   }

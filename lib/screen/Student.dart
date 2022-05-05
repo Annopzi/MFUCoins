@@ -159,7 +159,7 @@ class _StudentName_screenState extends State<StudentName_screen> {
 Widget _buildRow(String dataRow) {
   return ListTile(
     tileColor: Color.fromARGB(255, 104, 68, 163),
-    contentPadding: EdgeInsets.all(30.0),
+    contentPadding: EdgeInsets.all(20.0),
     style: ListTileStyle.drawer,
     title: Text(
       dataRow,
@@ -176,7 +176,7 @@ Widget _buildRow(String dataRow) {
 Widget _buildRow2(String dataRow) {
   return ListTile(
     tileColor: Color.fromARGB(255, 104, 68, 163),
-    contentPadding: EdgeInsets.all(30.0),
+    contentPadding: EdgeInsets.all(20.0),
     style: ListTileStyle.drawer,
     title: Text(
       dataRow,

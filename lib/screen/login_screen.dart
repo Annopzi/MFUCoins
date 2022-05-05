@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:mfc_coin/main.dart';
+import 'package:mfc_coin/screen/Student.dart';
 import 'package:mfc_coin/screen/futuredata.dart';
 import 'package:mfc_coin/screen/home_screen.dart';
 import 'package:mfc_coin/screen/signup_screen.dart';
@@ -25,6 +26,7 @@ class _Login_screenState extends State<Login_screen> {
   @override
   void initState() {
     super.initState();
+    ChangeNotifier();
     passwordController = TextEditingController();
     passwordVisibility = false;
     emailController = TextEditingController();
@@ -228,21 +230,11 @@ class _Login_screenState extends State<Login_screen> {
                   // B = snapshot.data;
 
                   // print("B: $B");
+
                   return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color(0xFF280C55),
-                      elevation: 8,
-                    ),
                     onPressed: () {
                       if (emailController.text.isNotEmpty &&
                           passwordController.text.isNotEmpty) {
-                        for (var i = 0;
-                            i <= snapshot.data.toString().length;
-                            i++) {
-                          // print("I: $i");
-                          // if (emailController.text == "${sna}") {
-                          // }
-                        }
                         if (emailController.text == "${snapshot.data[0]["email"].toString()}" && passwordController.text == "${snapshot.data[0]["password"].toString()}" ||
                             emailController.text ==
                                     "${snapshot.data[1]["email"].toString()}" &&
@@ -295,12 +287,7 @@ class _Login_screenState extends State<Login_screen> {
                                 const Text('Please input E-mail & Password'),
                             actions: [
                               TextButton(
-                                onPressed: () => Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MyHomePage(),
-                                  ),
-                                ),
+                                onPressed: () => Navigator.pop(context),
                                 child: const Text('OK'),
                               ),
                             ],
@@ -308,6 +295,10 @@ class _Login_screenState extends State<Login_screen> {
                         );
                       }
                     },
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(0xFF280C55),
+                      elevation: 8,
+                    ),
                     child: const Text(
                       'Login',
                       style: TextStyle(
