@@ -61,7 +61,12 @@ class _Home_screenState extends State<Home_screen> {
             ),
             Align(
               child: Center(
-                child: Text("Lasted History"),
+                child: Text(
+                  "Lasted History",
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
               ),
             ),
             SizedBox(

@@ -96,8 +96,9 @@ class _signup_screenState extends State<signup_screen> {
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
-                child: Image.network(
-                  'https://picsum.photos/seed/498/600',
+                child: Image.asset(
+                  'assets/images/mfu_coin_192.png',
+                  
                 ),
               ),
             ),

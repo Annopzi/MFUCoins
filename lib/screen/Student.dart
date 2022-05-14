@@ -65,7 +65,7 @@ class _StudentName_screenState extends State<StudentName_screen> {
                     return Column(
                       children: [
                         _buildRow(
-                          "ID: [ No Have Data ]",
+                          "ID:  No Internet ",
                         ),
                       ],
                     );
@@ -92,7 +92,7 @@ class _StudentName_screenState extends State<StudentName_screen> {
                     return Column(
                       children: [
                         _buildRow(
-                          "Name: [ No Have Data ]",
+                          "Name:  No Internet ",
                         ),
                       ],
                     );
@@ -119,7 +119,7 @@ class _StudentName_screenState extends State<StudentName_screen> {
                     return Column(
                       children: [
                         _buildRow(
-                          "Email: [ No Have Data ]",
+                          "Email:  No Internet ",
                         ),
                       ],
                     );

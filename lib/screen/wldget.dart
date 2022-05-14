@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mfc_coin/main.dart';
 import 'package:mfc_coin/screen/Student.dart';
 import 'package:mfc_coin/screen/futuredata.dart';
@@ -114,25 +115,38 @@ Widget Trans_finish(BuildContext context, String title, String content) {
 Widget consumer() {
   return Consumer(
     builder: ((context, HistoryProvider provider, child) {
-      return ListView.builder(
-        itemCount: provider.historys.length,
-        itemBuilder: (context, index) {
-          history data = provider.historys[index];
-          return Card(
-            elevation: 5,
-            child: ListTile(
-              title: title(data.title),
-              subtitle: subtitle(data.date.toString()),
-              //
-              // trailing: ,
-              trailing: Title(
-                color: Colors.black,
-                child: amount(data.amount.toString()),
-              ),
+      var count = provider.historys.length;
+      if (count <= 0) {
+        return Center(
+          child: Text(
+            "No have data.",
+            style: TextStyle(
+              fontSize: 35,
             ),
-          );
-        },
-      );
+          ),
+        );
+      } else {
+        return ListView.builder(
+          itemCount: count,
+          itemBuilder: (context, index) {
+            history data = provider.historys[index];
+            return Card(
+              elevation: 5,
+              child: ListTile(
+                title: title(data.title),
+                subtitle:
+                    subtitle(DateFormat("dd/MM/yyyy HH:mm").format(data.date)),
+                //
+                // trailing: ,
+                trailing: Title(
+                  color: Colors.black,
+                  child: amount(data.amount.toString()),
+                ),
+              ),
+            );
+          },
+        );
+      }
     }),
   );
 }
@@ -175,7 +189,7 @@ Widget infoacc(BuildContext context) {
                     return Column(
                       children: [
                         amount_by_acc(
-                          "ID: [ No Have Data ]",
+                          " No Internet, Try agin",
                         ),
                       ],
                     );

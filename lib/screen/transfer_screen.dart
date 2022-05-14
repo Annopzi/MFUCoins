@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mfc_coin/provider/history.dart';
+import 'package:mfc_coin/provider/history_provider.dart';
 import 'package:mfc_coin/screen/futuredata.dart';
 import 'package:mfc_coin/screen/home_screen.dart';
 import 'package:mfc_coin/screen/wldget.dart';
+import 'package:provider/provider.dart';
 
 class transfer_screen extends StatefulWidget {
   const transfer_screen({Key? key}) : super(key: key);
@@ -11,8 +14,6 @@ class transfer_screen extends StatefulWidget {
 }
 
 class _transfer_screenState extends State<transfer_screen> {
-
-
   //
   late TextEditingController walletidController;
   late TextEditingController amountController;
@@ -26,9 +27,6 @@ class _transfer_screenState extends State<transfer_screen> {
 
   @override
   Widget build(BuildContext context) {
-    var addess = 'MFA9-4SD7-YR5G-B6OA';
-    var amount = 600;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(77, 42, 134, 1),
@@ -43,11 +41,7 @@ class _transfer_screenState extends State<transfer_screen> {
         ),
         centerTitle: true,
         actions: [
-          CircleAvatar(
-            child: Image.asset(
-              'assets/images/logo_profile_test.png',
-            ),
-          ),
+          CircleAvatar(child: CircleAvatars("A")),
         ],
       ),
       //
@@ -128,7 +122,7 @@ class _transfer_screenState extends State<transfer_screen> {
                     ],
                   );
                 } else {
-                  return Loading("Loading...");
+                  return CircularProgressIndicator();
                 }
               },
               // child:
@@ -191,11 +185,26 @@ class _transfer_screenState extends State<transfer_screen> {
                               "Please input Wallet & Amount"),
                         );
                       } else {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) =>
-                              Trans_finish(context, "Success", "Finish"),
+                        var title = "Transfer money";
+                        var Id = walletidController.text;
+                        var Amount = amountController.text;
+                        print(Id);
+                        print(Amount);
+                        history statement = history(
+                          title: "${title} To ${Id}",
+                          amount: double.parse(Amount),
+                          date: DateTime.now(),
                         );
+                        var provider = Provider.of<HistoryProvider>(context,
+                            listen: false);
+                        provider.addhistory(statement);
+
+                        Navigator.pop(context);
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) =>
+                        //       Trans_finish(context, "Success", "Finish"),
+                        // );
                       }
                     } else {
                       showDialog(

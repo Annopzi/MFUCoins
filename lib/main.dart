@@ -4,7 +4,6 @@ import 'package:mfc_coin/screen/Student.dart';
 import 'package:mfc_coin/screen/history.dart';
 import 'package:mfc_coin/screen/home_screen.dart';
 import 'package:mfc_coin/screen/login_screen.dart';
-import 'package:mfc_coin/screen/profile.dart';
 import 'package:mfc_coin/screen/transfer_qrscan.dart';
 import 'package:provider/provider.dart';
 

@@ -1,10 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:mfc_coin/main.dart';
-import 'package:mfc_coin/screen/Student.dart';
 import 'package:mfc_coin/screen/futuredata.dart';
-import 'package:mfc_coin/screen/home_screen.dart';
 import 'package:mfc_coin/screen/signup_screen.dart';
+import 'package:http/http.dart' as http;
 
 class Login_screen extends StatefulWidget {
   const Login_screen({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class _Login_screenState extends State<Login_screen> {
                   ));
             },
             child: const Text(
-              'MFU-Wallet',
+              'MFc-Wallet',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Color.fromRGBO(255, 255, 255, 1),
@@ -97,8 +98,9 @@ class _Login_screenState extends State<Login_screen> {
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
-                child: Image.network(
-                  'https://picsum.photos/seed/498/600',
+                child: Image.asset(
+                  'assets/images/mfu_coin_192.png',
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
               ),
             ),
@@ -233,6 +235,7 @@ class _Login_screenState extends State<Login_screen> {
 
                   return ElevatedButton(
                     onPressed: () {
+                      // login();
                       if (emailController.text.isNotEmpty &&
                           passwordController.text.isNotEmpty) {
                         if (emailController.text == "${snapshot.data[0]["email"].toString()}" && passwordController.text == "${snapshot.data[0]["password"].toString()}" ||
@@ -348,5 +351,37 @@ class _Login_screenState extends State<Login_screen> {
       ),
 //======================================================
     );
+  }
+
+  Future login() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      var response = await http.post(
+          Uri.parse("http://selab.mfu.ac.th:7631/api/regismfuwallet"),
+          body: ({
+            "email": emailController.text,
+            "password": passwordController.text,
+          }));
+      if (response.statusCode == 200) {
+        final body = json.decode(response.body);
+        print("Token: " + body.toString());
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(
+        //     content: Text("Token: ${body["token"]}"),
+        //   ),
+        // );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Invalid"),
+          ),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("E-mail or Password is empty"),
+        ),
+      );
+    }
   }
 }
