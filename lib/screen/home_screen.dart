@@ -62,7 +62,7 @@ class _Home_screenState extends State<Home_screen> {
             Align(
               child: Center(
                 child: Text(
-                  "Lasted History",
+                  "Lasteds History",
                   style: TextStyle(
                     fontSize: 24,
                   ),
